@@ -71,12 +71,6 @@ ContentCraft Pro is a professional document creation platform that guides users 
 - **Lucide React**: Beautiful icon library
 - **Sonner**: Toast notifications
 
-### Deployment
-- **Backend**: Render (https://oceanai-assignment-cg5f.onrender.com)
-- **Frontend**: Vercel (Production-ready deployment)
-- **HTTPS**: Encrypted communication for security
-
-## 📋 Prerequisites
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
@@ -442,14 +436,6 @@ created_at TEXT NOT NULL
 
 ---
 
-## 🚀 Deployment
-
-### Production Deployment URLs
-
-- **Backend (Render):** https://oceanai-assignment-cg5f.onrender.com
-- **Frontend (Vercel):** [Your Vercel URL here]
-- **API Docs:** https://oceanai-assignment-cg5f.onrender.com/docs
-
 ### Backend Deployment (Render)
 
 1. Push code to GitHub
@@ -479,7 +465,7 @@ created_at TEXT NOT NULL
    - **Output Directory**: `build`
 4. Set environment variable:
    ```
-   REACT_APP_BACKEND_URL=https://oceanai-assignment-cg5f.onrender.com
+   REACT_APP_BACKEND_URL=xyz
    ```
 5. Deploy
 
@@ -545,10 +531,6 @@ OceanAI_Assignment/
 - [ ] Logout works
 - [ ] Projects deleted successfully
 
-### API Testing
-
-Use the interactive Swagger UI at http://localhost:8000/docs to test all endpoints.
-
 ---
 
 ## 🐛 Troubleshooting
@@ -612,65 +594,6 @@ curl http://localhost:8000/health
 
 ---
 
-## 📝 Assignment Requirements Checklist
-
-### ✅ Functional Requirements
-
-- [x] **User Authentication & Project Management**
-  - [x] Secure JWT-based registration and login
-  - [x] Dashboard with all user projects
-  - [x] Create new projects
-  - [x] Delete projects
-  - [x] Store document configuration, content, and refinement history
-
-- [x] **Document Configuration (Scaffolding)**
-  - [x] Choose document type (.docx or .pptx)
-  - [x] Enter main topic/prompt
-  - [x] Word: Create custom outline (add, remove, reorder sections)
-  - [x] PowerPoint: Define slides with titles
-  
-- [x] **AI-Powered Content Generation**
-  - [x] Section-by-section generation using Gemini API
-  - [x] Context-aware LLM calls
-  - [x] Content stored in database
-
-- [x] **Interactive Refinement Interface**
-  - [x] Editor-style interface
-  - [x] AI refinement prompts per section
-  - [x] Like/Dislike feedback buttons
-  - [x] Comment system
-  - [x] All revisions persisted
-
-- [x] **Document Export**
-  - [x] Export .docx with python-docx
-  - [x] Export .pptx with python-pptx
-  - [x] Well-formatted output
-
-- [x] **Bonus: AI-Generated Templates**
-  - [x] "Smart Suggest" feature
-  - [x] AI generates section headers (Word) or slide titles (PowerPoint)
-  - [x] User can accept, edit, or regenerate
-
-### ✅ Technical Requirements
-
-- [x] **Backend**: FastAPI ✓
-- [x] **Frontend**: React ✓
-- [x] **Database**: SQLite ✓
-- [x] **Authentication**: JWT ✓
-- [x] **LLM Integration**: Google Gemini API ✓
-- [x] **Document Generation**: python-docx & python-pptx ✓
-
-### ✅ Evaluation Criteria
-
-- [x] **Functionality**: End-to-end flow works (Login → Configure → Generate → Refine → Export)
-- [x] **AI Integration**: Gemini API used for generation and refinement
-- [x] **User Experience**: Clean, responsive, intuitive UI
-- [x] **Output Quality**: Well-formatted .docx and .pptx files
-- [x] **Code Quality**: Clean, modular, readable code with best practices
-- [x] **Documentation**: Comprehensive README with setup, usage, and deployment instructions
-
----
-
 ## 👨‍💻 Development
 
 ### Running in Development Mode
@@ -722,21 +645,6 @@ This is an assignment project. Contributions are not being accepted at this time
 **Developer:** Ritik Tiwari  
 **GitHub:** [@RitikTiwari7379](https://github.com/RitikTiwari7379)  
 **Repository:** [OceanAI_Assignment](https://github.com/RitikTiwari7379/OceanAI_Assignment)
-
----
-
-## 🎬 Demo Video
-
-A comprehensive demo video (5-10 minutes) is available showing:
-- User registration and login
-- Creating Word document projects
-- Creating PowerPoint projects  
-- AI content generation
-- Interactive refinement (prompts, feedback, comments)
-- Exporting .docx and .pptx files
-- AI-Generated Template workflow (bonus feature)
-
-[Link to demo video will be added here]
 
 ---
 
