@@ -150,7 +150,6 @@ CORS_ORIGINS=http://localhost:3000
 4. Copy the key and paste it in your `.env` file
 
 #### Step 2.4: Start Backend Server
-#### Step 2.4: Start Backend Server
 
 ```bash
 # Make sure you're in backend directory with virtual environment active
@@ -167,13 +166,8 @@ INFO:     Application startup complete
 
 Backend will be available at: **http://localhost:8000**
 
-**API Documentation:** Visit http://localhost:8000/docs for interactive Swagger UI
-
----
-
 ### 3. Frontend Setup (React)
 
-#### Step 3.1: Navigate to Frontend Directory
 #### Step 3.1: Navigate to Frontend Directory
 
 ```bash
@@ -209,11 +203,6 @@ ENABLE_HEALTH_CHECK=false
 | `WDS_SOCKET_PORT` | Webpack Dev Server port | `3000` |
 | `REACT_APP_ENABLE_VISUAL_EDITS` | Visual editing features | `false` |
 | `ENABLE_HEALTH_CHECK` | Health check polling | `false` |
-
-#### Step 3.4: Start Development Server
-```bash
-npm start
-```
 
 #### Step 3.4: Start Development Server
 
@@ -507,29 +496,6 @@ OceanAI_Assignment/
 ├── .gitignore              # Git ignore rules
 └── README.md               # Project documentation (this file)
 ```
-
----
-
-## 🧪 Testing
-
-### Manual Testing Checklist
-
-- [ ] User registration works
-- [ ] User login works
-- [ ] Token validation works
-- [ ] Create Word project
-- [ ] Create PowerPoint project
-- [ ] AI template suggestion works
-- [ ] Content generation works
-- [ ] Section refinement works
-- [ ] Like/Dislike feedback works
-- [ ] Comments work
-- [ ] Revision history visible
-- [ ] Export .docx works
-- [ ] Export .pptx works
-- [ ] Session persists on refresh
-- [ ] Logout works
-- [ ] Projects deleted successfully
 
 ---
 
