@@ -56,7 +56,7 @@ const ProjectEditor = () => {
               disliked: feedbackRes.data.disliked
             };
           } catch (error) {
-            console.error(`Failed to load data for section ${section.id}:`, error);
+            // Failed to load section data, will use cached version
             return {
               ...section,
               persistedComments: [],
@@ -111,7 +111,7 @@ const ProjectEditor = () => {
             try {
               await fetchProject();
             } catch (err) {
-              console.log('Progress check failed:', err);
+              // Progress check failed, will retry
             }
           } else {
             clearInterval(progressCheck);
@@ -122,7 +122,7 @@ const ProjectEditor = () => {
         setTimeout(() => clearInterval(progressCheck), 120000);
       }
     } catch (error) {
-      console.error('Generation error:', error);
+      // Generation error handled
       
       if (error.response?.status === 400 && error.response?.data?.detail?.includes('already generated')) {
         toast.success('✅ Content is already available!');

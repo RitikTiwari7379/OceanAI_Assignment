@@ -49,6 +49,11 @@ app = FastAPI(lifespan=lifespan)
 api_router = APIRouter(prefix="/api")
 security = HTTPBearer()
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for monitoring"""
+    return {"status": "healthy", "service": "contentcraft-backend"}
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'

@@ -62,7 +62,7 @@ function App() {
           sessionStorage.removeItem('token');
           sessionStorage.removeItem('user');
           delete axios.defaults.headers.common['Authorization'];
-          console.log('Token validation failed, requiring fresh login:', error.response?.status);
+          // Token validation failed, user needs to login again
         }
       }
       
