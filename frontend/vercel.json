@@ -1,9 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "env": {
-    "REACT_APP_BACKEND_URL": "@backend_url",
-    "WDS_SOCKET_PORT": "443",
-    "REACT_APP_ENABLE_VISUAL_EDITS": "false"
-  }
+  "outputDirectory": "build"
 }
