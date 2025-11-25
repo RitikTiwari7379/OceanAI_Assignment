@@ -34,11 +34,11 @@ DATABASE_PATH = ROOT_DIR / 'app.db'
 # Gemini API setup
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 if GEMINI_API_KEY:
-    print(f"✓ Gemini API Key loaded: {GEMINI_API_KEY[:10]}...")
+    print(f"✓ Gemini API Key loaded successfully")
     genai.configure(api_key=GEMINI_API_KEY)
 else:
     print("❌ WARNING: GEMINI_API_KEY not found in environment variables")
-    print("Available environment variables:", [key for key in os.environ.keys() if 'GEMINI' in key or 'API' in key])
+    print("Please set GEMINI_API_KEY in your .env file")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
