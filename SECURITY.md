@@ -1,233 +1,113 @@
-# Security Policy
+# Security Checklist for Production Deployment
 
-## 🔒 Security & Privacy
-
-This project takes security seriously. This document outlines our security practices and how to report vulnerabilities.
-
-## 🚨 Important Security Notes
-
-### DO NOT Commit Sensitive Data
-
-**NEVER commit these files to git:**
-- `.env` files (backend/.env, frontend/.env)
-- `app.db` (SQLite database with user data)
-- API keys or secrets
-- Credentials or tokens
-- Private keys or certificates
+## ✅ Pre-Deployment Security Checklist
 
 ### Environment Variables
+- [ ] `.env` files are in `.gitignore`
+- [ ] No `.env` files committed to git
+- [ ] `.env.example` files created (without real secrets)
+- [ ] Strong `SECRET_KEY` generated (32+ characters)
+- [ ] `GEMINI_API_KEY` is valid and has proper quotas
+- [ ] `CORS_ORIGINS` restricted to specific domains (not `*`)
 
-All sensitive configuration is stored in `.env` files which are:
-- ✅ Listed in `.gitignore`
-- ✅ Never committed to repository
-- ✅ Loaded at runtime only
-- ✅ Different for development vs production
-
-### What's Safe in the Repository
-
-✅ **Safe to commit:**
-- Source code (without hardcoded secrets)
-- Configuration templates (with placeholder values)
-- Documentation
-- Package manifests (package.json, requirements.txt)
-- Deployment configs (render.yaml, vercel.json)
-
-❌ **NEVER commit:**
-- `.env` files
-- `app.db` database files
-- Any file containing actual API keys
-- User data or credentials
-
-## 🛡️ Security Measures Implemented
-
-### Authentication & Authorization
-- ✅ JWT-based authentication with secure token signing
-- ✅ Password hashing using bcrypt with salt
-- ✅ Token expiration (8 hours)
-- ✅ Session validation on every request
-- ✅ Automatic logout on token expiration
-
-### Data Protection
-- ✅ Passwords never stored in plaintext
-- ✅ SQL injection protection (parameterized queries)
-- ✅ Input validation with Pydantic models
-- ✅ CORS configuration to restrict origins
-- ✅ HTTPS enforced in production (Render/Vercel)
-
-### API Security
-- ✅ Environment variables for all secrets
-- ✅ No secrets exposed in logs
-- ✅ Rate limiting ready (can add slowapi)
-- ✅ Error messages don't expose internals
-- ✅ Health check endpoint for monitoring
-
-### Code Security
-- ✅ Dependencies regularly updated
-- ✅ No console.log statements exposing data
-- ✅ Proper error handling throughout
-- ✅ Type validation on all inputs
-
-## 🔑 Managing Secrets
-
-### For Development
-
-1. **Backend Secrets** (`backend/.env`):
-```bash
-SECRET_KEY=generate-strong-random-key
-GEMINI_API_KEY=your-gemini-api-key
-CORS_ORIGINS=http://localhost:3000
-```
-
-2. **Frontend Config** (`frontend/.env`):
-```bash
-REACT_APP_BACKEND_URL=http://localhost:8000
-```
-
-### For Production
-
-1. **Render (Backend):**
-   - Set environment variables in Render dashboard
-   - Never commit production keys to git
-   - Use strong, unique SECRET_KEY
-
-2. **Vercel (Frontend):**
-   - Set environment variables in Vercel dashboard
-   - Use production backend URL
-
-### Generating Secure Keys
-
-```bash
-# Generate strong SECRET_KEY
-python3 -c "import secrets; print(secrets.token_urlsafe(32))"
-
-# Example output: PPNXYru8jXBj2_GPqi1Nrf9pL_milNg9aU3bapV0lQk
-```
-
-## 🔍 Security Checklist
-
-Before deploying or committing code:
-
-- [ ] No `.env` files in git history
+### Git Repository
 - [ ] No API keys in code or logs
-- [ ] Strong SECRET_KEY in production
-- [ ] CORS_ORIGINS restricted (not `*`)
-- [ ] HTTPS enabled in production
-- [ ] Database file not committed
-- [ ] All dependencies updated
-- [ ] Input validation on all endpoints
-- [ ] Error messages don't expose internals
-- [ ] Passwords properly hashed
-- [ ] JWT tokens have expiration
+- [ ] No database files committed
+- [ ] No hardcoded secrets in source code
+- [ ] Git history clean (no sensitive data in past commits)
+- [ ] `.gitignore` properly configured
 
-## 🚨 Reporting Security Issues
+### Backend Security
+- [ ] JWT tokens with expiration (8 hours)
+- [ ] Passwords hashed with bcrypt
+- [ ] SQL injection protection (parameterized queries)
+- [ ] HTTPS enforced (Render provides this)
+- [ ] CORS properly configured
+- [ ] No sensitive data in logs
+- [ ] Error messages don't expose internal details
 
-If you discover a security vulnerability:
+### Frontend Security
+- [ ] Backend URL uses HTTPS in production
+- [ ] No API keys in frontend code
+- [ ] sessionStorage used (not localStorage)
+- [ ] No console.log in production
+- [ ] HTTPS enforced (Vercel provides this)
 
-1. **DO NOT** open a public issue
-2. Email the maintainer directly
-3. Provide detailed information:
-   - Description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Suggested fix (if any)
+### Deployment Platforms
+- [ ] Render environment variables set correctly
+- [ ] Vercel environment variables set correctly
+- [ ] Both services using HTTPS
+- [ ] Health check endpoint working
 
-## 📝 Security Best Practices
+## 🔒 What's Protected
 
-### For Developers
+✅ **Secrets NOT in Repository:**
+- `SECRET_KEY` - JWT signing key
+- `GEMINI_API_KEY` - Google AI API key
+- `*.env` files - All environment configurations
+- `*.db` files - SQLite databases
+- User passwords - Hashed with bcrypt
 
-1. **Never hardcode secrets**
-   ```python
-   # ❌ BAD
-   API_KEY = "AIzaSyAbc123..."
-   
-   # ✅ GOOD
-   API_KEY = os.environ.get('API_KEY')
-   ```
+✅ **Security Measures Active:**
+- JWT authentication with 8-hour expiration
+- Password hashing with bcrypt and salt
+- CORS restricted to specific origins
+- HTTPS encryption on both frontend and backend
+- SQL injection protection via parameterized queries
+- Token validation on every API request
+- Automatic session cleanup
 
-2. **Use environment variables**
-   ```bash
-   # Always use .env files
-   # Never commit them to git
-   ```
+## ⚠️ Important Reminders
 
-3. **Validate all inputs**
-   ```python
-   # Use Pydantic models for validation
-   class UserInput(BaseModel):
-       email: EmailStr
-       password: str
-   ```
+### Never Commit These Files:
+- `.env` (backend or frontend)
+- `app.db` (database)
+- Any file containing API keys or secrets
+- `node_modules/` or `.venv/`
 
-4. **Hash passwords properly**
-   ```python
-   # Use bcrypt, never plaintext
-   hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-   ```
+### For New Team Members:
+1. Clone the repository
+2. Copy `.env.example` to `.env` in both `backend/` and `frontend/`
+3. Fill in your own API keys and secrets
+4. Never commit `.env` files
 
-5. **Check .gitignore**
-   ```bash
-   # Verify sensitive files are ignored
-   git check-ignore backend/.env
-   ```
+### If Secrets Are Exposed:
+1. Immediately revoke/regenerate exposed keys
+2. Remove from git history: `git filter-branch` or BFG Repo-Cleaner
+3. Force push: `git push --force`
+4. Update all deployment platforms with new keys
+5. Rotate all credentials
 
-### For Users
+## 🛡️ Production Security Best Practices
 
-1. **Keep dependencies updated**
-   ```bash
-   pip install --upgrade -r requirements.txt
-   npm update
-   ```
+### Implemented:
+✅ Environment-based configuration
+✅ Secret key rotation capability
+✅ HTTPS-only communication
+✅ Token-based authentication
+✅ Password hashing (bcrypt)
+✅ CORS configuration
+✅ Input validation (Pydantic)
+✅ Error handling without leaks
 
-2. **Use strong passwords**
-   - Minimum 8 characters
-   - Mix of letters, numbers, symbols
+### Recommended for Future:
+- [ ] Rate limiting (slowapi)
+- [ ] API request logging
+- [ ] Monitoring and alerting
+- [ ] Regular security audits
+- [ ] Database backups
+- [ ] SSL certificate monitoring
+- [ ] Dependency vulnerability scanning
 
-3. **Protect your API keys**
-   - Never share your Gemini API key
-   - Rotate keys if exposed
-   - Use API key restrictions in Google Cloud Console
+## 📞 Emergency Contacts
 
-4. **Monitor usage**
-   - Check Render logs for unusual activity
-   - Monitor Gemini API usage quotas
-
-## 🔄 Incident Response
-
-If a security incident occurs:
-
-1. **Immediate Actions:**
-   - Revoke compromised API keys
-   - Generate new SECRET_KEY
-   - Force logout all users
-   - Review logs for unauthorized access
-
-2. **Investigation:**
-   - Identify scope of breach
-   - Determine what data was accessed
-   - Document timeline of events
-
-3. **Remediation:**
-   - Fix vulnerability
-   - Update security measures
-   - Notify affected users (if applicable)
-   - Deploy patches immediately
-
-4. **Prevention:**
-   - Update security practices
-   - Add monitoring/alerts
-   - Document lessons learned
-
-## 📚 Additional Resources
-
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [FastAPI Security](https://fastapi.tiangolo.com/tutorial/security/)
-- [JWT Best Practices](https://tools.ietf.org/html/rfc8725)
-- [Google Cloud Security](https://cloud.google.com/security/best-practices)
-
-## 📅 Last Updated
-
-November 26, 2025
+If you discover a security issue:
+1. Do NOT commit the fix publicly
+2. Contact the repository owner privately
+3. Rotate affected credentials immediately
+4. Document the incident
 
 ---
 
-**Remember: Security is everyone's responsibility. When in doubt, ask!**
+**Last Updated:** November 26, 2025  
+**Status:** ✅ Production Ready with Security Best Practices

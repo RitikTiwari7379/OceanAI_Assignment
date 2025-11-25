@@ -34,7 +34,7 @@ DATABASE_PATH = ROOT_DIR / 'app.db'
 # Gemini API setup
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
 if GEMINI_API_KEY:
-    print(f"✓ Gemini API Key loaded successfully")
+    print("✓ Gemini API Key loaded successfully")
     genai.configure(api_key=GEMINI_API_KEY)
 else:
     print("❌ WARNING: GEMINI_API_KEY not found in environment variables")
